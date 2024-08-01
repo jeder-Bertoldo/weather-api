@@ -1,2 +1,4 @@
-package com.example.weather_api.controller;public class ExtremeWeatherEventController {
+package com.example.weather_api.controller;
+
+public class ExtremeWeatherEventController {
 }
