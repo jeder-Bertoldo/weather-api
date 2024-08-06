@@ -16,7 +16,7 @@ import java.util.Map;
 public class ForecastService {
     private final RestTemplate restTemplate;
     private final ForecastRepository forecastRepository;
-    private final String apiKey = "YOUR_OPENWEATHERMAP_API_KEY";
+    private final String apiKey = "810b90d2c9d2f70fc9272e2ba6e30d22";
     private final String apiUrl = "https://api.openweathermap.org/data/2.5/forecast/daily?q={city}&cnt=5&appid={apiKey}&units=metric";
 
     @Autowired

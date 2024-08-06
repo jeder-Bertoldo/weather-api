@@ -15,7 +15,7 @@ import java.util.Map;
 public class WeatherService {
     private final RestTemplate restTemplate;
     private final WeatherDataRepository weatherDataRepository;
-    private final String apiKey = "YOUR_OPENWEATHERMAP_API_KEY";
+    private final String apiKey = "810b90d2c9d2f70fc9272e2ba6e30d22";
     private final String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}&units=metric";
 
     @Autowired
@@ -30,7 +30,7 @@ public class WeatherService {
 
         if (body != null) {
             Map<String, Object> main = (Map<String, Object>) body.get("main");
-            Map<String, Object> weather = ((List<Map<String, Object>>) body.get("weather")).get(0);
+            Map<String, Object> weather = ((Map<String, Object>) ((List<?>) body.get("weather")).get(0));
 
             WeatherData weatherData = new WeatherData();
             weatherData.setCity(city);
