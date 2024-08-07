@@ -5,8 +5,6 @@ import com.example.weatherapi.repository.ExtremeWeatherEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ExtremeWeatherEventService {
     private final ExtremeWeatherEventRepository eventRepository;
@@ -16,15 +14,7 @@ public class ExtremeWeatherEventService {
         this.eventRepository = eventRepository;
     }
 
-    public ExtremeWeatherEvent createEvent(ExtremeWeatherEvent event) {
+    public ExtremeWeatherEvent saveEvent(ExtremeWeatherEvent event) {
         return eventRepository.save(event);
-    }
-
-    public List<ExtremeWeatherEvent> getAllEvents() {
-        return eventRepository.findAll();
-    }
-
-    public void deleteEvent(Long id) {
-        eventRepository.deleteById(id);
     }
 }

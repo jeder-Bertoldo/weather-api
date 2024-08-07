@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+
 import java.time.LocalDate;
 
 @Entity
@@ -15,20 +16,47 @@ public class Forecast {
 
     private String city;
     private LocalDate date;
-    private double temperature;
+    private Double temperature;
     private String description;
 
-    public void setDate(LocalDate dt) {
+    // Getters and Setters
+    public Long getId() {
+        return id;
     }
 
-    public void setTemperature(Object o) {
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setDescription(Object o) {
+    public String getCity() {
+        return city;
     }
 
     public void setCity(String city) {
+        this.city = city;
     }
 
-    // Getters and Setters
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

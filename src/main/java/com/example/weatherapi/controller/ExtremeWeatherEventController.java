@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/events")
 public class ExtremeWeatherEventController {
@@ -21,19 +19,7 @@ public class ExtremeWeatherEventController {
 
     @PostMapping
     public ResponseEntity<ExtremeWeatherEvent> createEvent(@RequestBody ExtremeWeatherEvent event) {
-        ExtremeWeatherEvent createdEvent = eventService.createEvent(event);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdEvent);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<ExtremeWeatherEvent>> getAllEvents() {
-        List<ExtremeWeatherEvent> events = eventService.getAllEvents();
-        return ResponseEntity.ok(events);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteEvent(@PathVariable Long id) {
-        eventService.deleteEvent(id);
-        return ResponseEntity.ok().build();
+        ExtremeWeatherEvent createdEvent = eventService.saveEvent(event);
+        return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
     }
 }

@@ -39,9 +39,17 @@ public class WeatherService {
             weatherData.setDescription((String) weather.get("description"));
             weatherData.setTimestamp(LocalDateTime.now());
 
-            return weatherDataRepository.save(weatherData);
+            WeatherData savedData = weatherDataRepository.save(weatherData);
+            System.out.println("Saved weather data: " + savedData);
+            return savedData;
         }
 
         return null;
+    }
+
+    public List<WeatherData> getWeatherHistory(String city) {
+        List<WeatherData> weatherHistory = weatherDataRepository.findByCityOrderByTimestampDesc(city);
+        System.out.println("Weather history for city: " + city + ", size: " + weatherHistory.size());
+        return weatherHistory;
     }
 }

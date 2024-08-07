@@ -16,7 +16,7 @@ public class ExtremeWeatherEvent {
     private LocalDate endDate;
     private String description;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Observation> observations;
 
     // Getters and Setters
