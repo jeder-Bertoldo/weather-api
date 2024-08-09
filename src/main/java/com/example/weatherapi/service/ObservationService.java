@@ -5,7 +5,6 @@ import com.example.weatherapi.repository.ObservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,13 +16,12 @@ public class ObservationService {
         this.observationRepository = observationRepository;
     }
 
-    public Observation createObservation(Observation observation) {
-        observation.setDate(LocalDateTime.now());
+    public Observation saveObservation(Observation observation) {
         return observationRepository.save(observation);
     }
 
-    public List<Observation> getObservationsByEventId(Long eventId) {
-        return observationRepository.findByEventId(eventId);
+    public List<Observation> getObservationsByEvent(Long eventId) {
+        return observationRepository.findByEventIdOrderByDateDesc(eventId);
     }
 
     public void deleteObservation(Long id) {

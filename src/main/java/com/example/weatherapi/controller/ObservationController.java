@@ -21,19 +21,19 @@ public class ObservationController {
 
     @PostMapping
     public ResponseEntity<Observation> createObservation(@RequestBody Observation observation) {
-        Observation createdObservation = observationService.createObservation(observation);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdObservation);
+        Observation createdObservation = observationService.saveObservation(observation);
+        return new ResponseEntity<>(createdObservation, HttpStatus.CREATED);
     }
 
     @GetMapping("/{eventId}")
-    public ResponseEntity<List<Observation>> getObservationsByEventId(@PathVariable Long eventId) {
-        List<Observation> observations = observationService.getObservationsByEventId(eventId);
+    public ResponseEntity<List<Observation>> getObservationsByEvent(@PathVariable Long eventId) {
+        List<Observation> observations = observationService.getObservationsByEvent(eventId);
         return ResponseEntity.ok(observations);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteObservation(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteObservation(@PathVariable Long id) {
         observationService.deleteObservation(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

@@ -33,10 +33,8 @@ public class WeatherController {
     public ResponseEntity<List<WeatherData>> getWeatherHistory(@PathVariable String city) {
         List<WeatherData> weatherHistory = weatherService.getWeatherHistory(city);
         if (weatherHistory != null && !weatherHistory.isEmpty()) {
-            System.out.println("Returning weather history for city: " + city);
             return ResponseEntity.ok(weatherHistory);
         } else {
-            System.out.println("No weather history found for city: " + city);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }

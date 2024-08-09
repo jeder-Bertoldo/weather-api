@@ -30,26 +30,33 @@ public class WeatherService {
 
         if (body != null) {
             Map<String, Object> main = (Map<String, Object>) body.get("main");
-            Map<String, Object> weather = ((Map<String, Object>) ((List<?>) body.get("weather")).get(0));
+            List<Map<String, Object>> weatherList = (List<Map<String, Object>>) body.get("weather");
+            Map<String, Object> weather = weatherList.get(0);
 
             WeatherData weatherData = new WeatherData();
             weatherData.setCity(city);
-            weatherData.setTemperature((Double) main.get("temp"));
+            weatherData.setTemperature(getDoubleValue(main.get("temp")));
             weatherData.setHumidity((Integer) main.get("humidity"));
             weatherData.setDescription((String) weather.get("description"));
             weatherData.setTimestamp(LocalDateTime.now());
 
-            WeatherData savedData = weatherDataRepository.save(weatherData);
-            System.out.println("Saved weather data: " + savedData);
-            return savedData;
+            return weatherDataRepository.save(weatherData);
         }
 
         return null;
     }
 
     public List<WeatherData> getWeatherHistory(String city) {
-        List<WeatherData> weatherHistory = weatherDataRepository.findByCityOrderByTimestampDesc(city);
-        System.out.println("Weather history for city: " + city + ", size: " + weatherHistory.size());
-        return weatherHistory;
+        return weatherDataRepository.findByCityOrderByTimestampDesc(city);
+    }
+
+    private Double getDoubleValue(Object value) {
+        if (value instanceof Integer) {
+            return ((Integer) value).doubleValue();
+        } else if (value instanceof Double) {
+            return (Double) value;
+        } else {
+            return null;
+        }
     }
 }
